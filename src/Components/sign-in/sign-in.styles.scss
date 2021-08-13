@@ -1,6 +1,8 @@
 .signIn {
   width: 30vw;
   margin-left: 5%;
+  display: flex;
+  flex-direction: column;
 
   h2 {
     font-size: 3rem;

@@ -8,7 +8,7 @@ const FormInput = ({ handleChange, label, ...otherProps }) => {
       {label ? (
         <label
           className={`${
-            otherProps.value.length ? "shrink" : ""
+            otherProps.value.length === 0 ? "" : "shrink"
           } form_input_label`}
         >
           {label.toUpperCase()}
