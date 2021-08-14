@@ -19,13 +19,16 @@
     justify-content: flex-end;
 
     .option {
-      padding: 1rem 1.5rem;
+      padding: 1rem 1.2rem;
       text-decoration: none;
       color: #000;
       cursor: pointer;
       h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 500;
+        @media (max-width: 555px) {
+          font-size: 1.5rem;
+        }
       }
     }
   }
