@@ -2,11 +2,12 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  //   border: 1px solid red;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 927px) {
   .authentication {
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
   }
 }
