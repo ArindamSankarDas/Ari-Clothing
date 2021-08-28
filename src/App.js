@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import Header from "./Components/header/header.component";
 import HomePage from "./Pages/home/HomePage.component";
 import ShopPage from "./Pages/shop/shop.component";
-import SignIn_SignUp_Page from "./Pages/authentication/sign-in-and-sign-up.component";
+import SignInAndSignUpPage from "./Pages/authentication/sign-in-and-sign-up.component";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -41,15 +41,29 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/signIn" component={SignIn_SignUp_Page} />
+          <Route
+            exact
+            path="/signIn"
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInAndSignUpPage />
+              )
+            }
+          />
         </Switch>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
