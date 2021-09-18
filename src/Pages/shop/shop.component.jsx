@@ -7,7 +7,6 @@ import { Route } from "react-router-dom";
 import "./shop.styles.scss";
 
 const ShopPage = ({ match }) => {
-  console.log(match);
   return (
     <div className="shop_page">
       <Route exact path={`${match.path}`} component={CollectionsOverview} />
