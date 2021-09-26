@@ -9,11 +9,11 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import Header from "./Components/header/header.component";
-import HomePage from "./Pages/home/HomePage.component";
 import ShopPage from "./Pages/shop/shop.component";
-import SignInAndSignUpPage from "./Pages/authentication/sign-in-and-sign-up.component";
+import HomePage from "./Pages/home/HomePage.component";
+import Header from "./Components/header/header.component";
 import CheckoutPage from "./Pages/checkout/checkout.component";
+import SignInAndSignUpPage from "./Pages/authentication/sign-in-and-sign-up.component";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
