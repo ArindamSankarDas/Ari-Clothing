@@ -1,4 +1,7 @@
-.cart_dropdown {
+import styled from "styled-components";
+import Button from "../custom-button/custom-button.component";
+
+export const CartDropdownContainer = styled.div`
   position: absolute;
   width: 28rem;
   height: 34rem;
@@ -25,18 +28,19 @@
   &::-webkit-scrollbar-thumb:hover {
     background: rgb(39, 38, 38);
   }
+`;
 
-  .empty_message {
-    font-size: 1.8rem;
-    margin: 10rem auto;
-  }
-  .cart_items {
-    height: 24rem;
-    display: flex;
-    flex-direction: column;
-  }
+export const CartItemsContainer = styled.div`
+  height: 24rem;
+  display: flex;
+  flex-direction: column;
+`;
 
-  button {
-    margin-top: auto;
-  }
-}
+export const EmptyMessageContainer = styled.span`
+  font-size: 1.8rem;
+  margin: 10rem auto;
+`;
+
+export const ButtonContainer = styled(Button)`
+  margin-top: auto;
+`;
