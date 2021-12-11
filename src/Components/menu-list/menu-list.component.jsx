@@ -5,15 +5,15 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectMenuListSections } from "../../redux/menu-list/menu-list.selectors";
 
-import "./menu-list.styles.scss";
+import { MenuListDiv } from "./menu-list.styles";
 
 const MenuList = ({ sections }) => {
   return (
-    <div className="menu-list">
+    <MenuListDiv>
       {sections.map(({ id, ...otherSectionProps }) => {
         return <MenuItem key={id} {...otherSectionProps} />;
       })}
-    </div>
+    </MenuListDiv>
   );
 };
 

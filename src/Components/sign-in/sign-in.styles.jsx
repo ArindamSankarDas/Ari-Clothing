@@ -1,4 +1,6 @@
-.signIn {
+import styled from "styled-components";
+
+export const SignInDiv = styled.div`
   width: auto;
   display: flex;
   flex-direction: column;
@@ -12,8 +14,8 @@
     font-size: 2rem;
     padding-top: 1.5rem;
   }
+`;
 
-  .custom_buttons {
-    display: flex;
-  }
-}
+export const CustomButtons = styled.div`
+  display: flex;
+`;
