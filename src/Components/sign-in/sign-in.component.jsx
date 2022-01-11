@@ -1,29 +1,32 @@
 import React from "react";
-import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
-import Button from "../custom-button/custom-button.component";
-import FormInput from "../form-input/form-input.component";
 import { SignInDiv, CustomButtons } from "./sign-in.styles";
+
+import FormInput from "../form-input/form-input.component";
+import Button from "../custom-button/custom-button.component";
+
+import { connect } from "react-redux";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../redux/user/user.actions";
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user_email: "",
-      user_password: "",
+      email: "",
+      password: "",
     };
   }
 
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { user_email, user_password } = this.state;
+    const { emailSignInStart } = this.props;
+    const { email, password } = this.state;
 
-    try {
-      await auth.signInWithEmailAndPassword(user_email, user_password);
-      this.setState({ user_email: "", user_password: "" });
-    } catch (error) {
-      console.log(error);
-    }
+    emailSignInStart(email, password);
   };
 
   handleChange = (event) => {
@@ -33,6 +36,8 @@ class SignIn extends React.Component {
   };
 
   render() {
+    const { googleSignInStart } = this.props;
+
     return (
       <SignInDiv>
         <h2>Already have an Account</h2>
@@ -41,18 +46,18 @@ class SignIn extends React.Component {
         <form id="form" onSubmit={this.handleSubmit}>
           <FormInput
             type="email"
-            name="user_email"
+            name="email"
             handleChange={this.handleChange}
-            value={this.state.user_email}
+            value={this.state.email}
             label="email"
             autoComplete="off"
             required
           />
           <FormInput
             type="password"
-            name="user_password"
+            name="password"
             handleChange={this.handleChange}
-            value={this.state.user_password}
+            value={this.state.password}
             label="password"
             autoComplete="off"
             required
@@ -60,8 +65,12 @@ class SignIn extends React.Component {
 
           <CustomButtons>
             <Button type="submit">Sign In</Button>
-            <Button onClick={signInWithGoogle} isGoogleSignIn={true}>
-              {""}Sign In With Google{""}
+            <Button
+              type="button"
+              onClick={googleSignInStart}
+              isGoogleSignIn={true}
+            >
+              Sign In With Google
             </Button>
           </CustomButtons>
         </form>
@@ -70,4 +79,10 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password })),
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
