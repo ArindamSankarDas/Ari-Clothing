@@ -8,15 +8,21 @@ import {
   ClearSpan,
 } from "./checkout-item.styles";
 
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   clearItemFromCart,
   addItem,
   removeItem,
 } from "../../redux/cart/cart.actions";
 
-const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
+const CheckoutItem = ({ cartItem }) => {
   const { name, imageUrl, quantity, price } = cartItem;
+
+  const dispatch = useDispatch();
+  const clearItemFromCartHandler = (item) => dispatch(clearItemFromCart(item));
+  const addItemHandler = (item) => dispatch(addItem(item));
+  const removeItemHandler = (item) => dispatch(removeItem(item));
+
   return (
     <CheckoutItemDiv>
       <ImageContainer>
@@ -25,19 +31,16 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
 
       <NameSpan>{name}</NameSpan>
       <ContentSpan>
-        <div onClick={() => removeItem(cartItem)}>&#10094;</div>
+        <div onClick={() => removeItemHandler(cartItem)}>&#10094;</div>
         <span>{quantity}</span>
-        <div onClick={() => addItem(cartItem)}>&#10095;</div>
+        <div onClick={() => addItemHandler(cartItem)}>&#10095;</div>
       </ContentSpan>
       <AmountSpan>{quantity * price}</AmountSpan>
-      <ClearSpan onClick={() => clearItem(cartItem)}>&#10006;</ClearSpan>
+      <ClearSpan onClick={() => clearItemFromCartHandler(cartItem)}>
+        &#10006;
+      </ClearSpan>
     </CheckoutItemDiv>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  clearItem: (item) => dispatch(clearItemFromCart(item)),
-  addItem: (item) => dispatch(addItem(item)),
-  removeItem: (item) => dispatch(removeItem(item)),
-});
-export default connect(null, mapDispatchToProps)(CheckoutItem);
+export default CheckoutItem;

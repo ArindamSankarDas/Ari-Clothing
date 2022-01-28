@@ -1,12 +1,15 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { MenuItemDiv, BackgroundImage, ContentDiv } from "./menu-item.styles";
 
-const MenuItem = ({ title, imageUrl, size, linkUrl, match, history }) => {
+const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
+  const history = useHistory();
+  const { url } = useRouteMatch();
+
   return (
     <MenuItemDiv
       isLarge={size}
-      onClick={() => history.push(`${match.url}${linkUrl}`)}
+      onClick={() => history.push(`${url}${linkUrl}`)}
     >
       <BackgroundImage imageUrl={imageUrl}>
         <ContentDiv>
@@ -18,4 +21,4 @@ const MenuItem = ({ title, imageUrl, size, linkUrl, match, history }) => {
   );
 };
 
-export default withRouter(MenuItem);
+export default MenuItem;

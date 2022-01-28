@@ -1,13 +1,15 @@
 import React from "react";
 import MenuItem from "../menu-item/menu-item.component";
 
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector } from "react-redux";
+
 import { selectMenuListSections } from "../../redux/menu-list/menu-list.selectors";
 
 import { MenuListDiv } from "./menu-list.styles";
 
-const MenuList = ({ sections }) => {
+const MenuList = () => {
+  const sections = useSelector(selectMenuListSections);
+
   return (
     <MenuListDiv>
       {sections.map(({ id, ...otherSectionProps }) => {
@@ -17,8 +19,4 @@ const MenuList = ({ sections }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  sections: selectMenuListSections,
-});
-
-export default connect(mapStateToProps)(MenuList);
+export default MenuList;
