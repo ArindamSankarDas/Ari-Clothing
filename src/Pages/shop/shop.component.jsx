@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { ShopPageContainer } from "./shop.styles";
 
 import { Route } from "react-router-dom";
@@ -11,10 +11,14 @@ import CollectionsOverviewContainer from "../../Components/collections-overview/
 
 const ShopPage = ({ match }) => {
   const dispatch = useDispatch();
+  const fetchCollectionsStartHandler = useCallback(
+    () => dispatch(fetchCollectionsStart()),
+    [dispatch]
+  );
 
   useEffect(() => {
-    dispatch(fetchCollectionsStart());
-  }, [dispatch]);
+    fetchCollectionsStartHandler();
+  }, [fetchCollectionsStartHandler]);
 
   return (
     <ShopPageContainer>
