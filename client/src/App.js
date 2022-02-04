@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
+import { GlobalStyle } from "./globalStyles";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
@@ -16,13 +17,17 @@ import SignInAndSignUpPage from "./Pages/authentication/sign-in-and-sign-up.comp
 const App = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
+  const checkUserSessionHandler = useCallback(() => {
+    return dispatch(checkUserSession());
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(checkUserSession());
-  }, [dispatch]);
+    return checkUserSessionHandler();
+  }, [checkUserSessionHandler]);
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

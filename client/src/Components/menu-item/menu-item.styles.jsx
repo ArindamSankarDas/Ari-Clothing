@@ -34,6 +34,10 @@ export const MenuItemDiv = styled.div`
   &:last-child {
     margin-left: 7.5px;
   }
+
+  @media (max-width: 470px) {
+    height: 20rem;
+  }
 `;
 
 export const BackgroundImage = styled.div`

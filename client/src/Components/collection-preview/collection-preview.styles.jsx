@@ -11,7 +11,17 @@ export const CollectionPreviewDiv = styled.div`
   }
 
   div {
-    display: flex;
+    display: flex;  
     justify-content: space-between;
+  }
+
+  @media (max-width: 800px) {
+    align-items: center;
+
+    div {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1.5rem;
+    }
   }
 `;
